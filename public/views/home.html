@@ -1,0 +1,59 @@
+
+<nav class='nav'>
+  <ul style="color:white;">
+    <li ng-if="isAuthenticated">{{ vm.profile.name }}</li>
+    <li ng-if="!isAuthenticated" ng-click="vm.authService.login()">Login</li>
+    <li ng-if="isAuthenticated" ng-click="vm.authService.logout()">Logout</li>
+    <img ng-src="{{ vm.profile.picture }}" ng-if="isAuthenticated">
+  </ul>
+</nav>
+<div class='whole'>
+  <div class='main'>
+
+    <h1 class='main-title'>NBA Power Rankings: Warriors still stuck behind Cavaliers, Clippers.</h1>
+    <img class='main-img' src="/images/main.jpeg">
+    <div class='social-bar'>
+      <div class="fb-share-button" data-href="http://localhost:3000/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fhome&amp;src=sdkpreparse">Share</a></div>
+        <div style='background: #3B5998;'><i class="fa fa-facebook" aria-hidden="true"></i></div>
+        <div style='background: #55ACEE;'><i class="fa fa-twitter" aria-hidden="true"></i></div>
+        <div style='background: #00E676;'><i class="fa fa-whatsapp" aria-hidden="true"></i></div>
+        <div style='background: #BD081C;'><i class="fa fa-pinterest" aria-hidden="true"></i></div>
+        <div style='background: grey;'><i class="fa fa-envelope" aria-hidden="true"></i></div>
+        <div style='background: white; color: grey; border: 1.5px solid grey'><i class="fa fa-commenting-o" aria-hidden="true"></i></div>
+    </div>
+
+    <div class='editor'>
+      <img src='/images/chase.jpg' style='height: 40px; width: 40px; border-radius: 50%;'>
+      <p>Chase Martin <br> chasESPN Senior Writer</p>
+    </div>
+
+    <div class='previous-weeks'>
+      <h4 style='color: #48494a ;font-size: 16px; line-height: 1.6; font-weight: bold; margin: 0px;'>Previous rankings: &nbsp</h4>
+      <h4 ng-repeat='week in weeks' style='color: #06c;  font-size: 16px; margin: 0px; line-height: 1.6' ng-click='getTeams(week.week)'>Week {{week.week}} <a style='color: black'> | &nbsp</a></h4>
+    </div>
+
+    <div class='team' ng-repeat='team in teams'>
+      <div class='logo-info'>
+          <img src= '{{team.image}}'>
+          <div class='team-rankings'>
+            <h4 style: 'color: black; font-weight: bold;'>{{team.ranking}}. <a style='color: #06c; font-weight: 600;'>{{team.name}}</a></h4>
+            <h5>2016-17 record: {{team.record}}</h5>
+            <h5><a style='color: #0066CC;'>Previous ranking</a>: {{team.previous_ranking}} <img src = {{team.position}} style='height: 10px; width: 12px;'></h5>
+          </div>
+      </div>
+      <div class='team-description'>
+        {{team.description}}
+      </div>
+    </div>
+    <div class='social-bar'>
+        <div style='background: #3B5998;'><i class="fa fa-facebook" aria-hidden="true"></i></div>
+        <div style='background: #55ACEE;'><i class="fa fa-twitter" aria-hidden="true"></i></div>
+        <div style='background: #00E676;'><i class="fa fa-whatsapp" aria-hidden="true"></i></div>
+        <div style='background: #BD081C;'><i class="fa fa-pinterest" aria-hidden="true"></i></div>
+        <div style='background: grey;'><i class="fa fa-envelope" aria-hidden="true"></i></div>
+        <div style='background: white; color: grey; border: 1.5px solid grey'><i class="fa fa-commenting-o" aria-hidden="true"></i></div>
+    </div>
+
+    <button type="button" class='comments-button'>Comments</button>
+  </div>
+</div>

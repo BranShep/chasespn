@@ -1,0 +1,26 @@
+
+<div class='whole'>
+  <div class='main'>
+    <h1 style='text-align: center; margin-top: 0px;'>Week {{currentWeek}} rankings</h1>
+    <div class='previous-weeks'>
+      <!-- <h4>Previous rankings:</h4> -->
+      <!-- <h4 ng-repeat='week in weeks'>{{week.number}} |</h4> -->
+    </div>
+    <div class='team' ng-repeat='team in teams'>
+      <div class='logo-info'>
+          <img src= '{{team.image}}'>
+          <div class='team-rankings'>
+            <h4>{{team.ranking}}. <a style='color: #0066CC;'>{{team.name}}</a></h4>
+            <h5>2016-17 record: {{team.record}}</h5>
+            <h5><a style='color: #0066CC;'>Previous ranking</a>: {{team.previous_ranking}} <img src = {{team.position}} style='height: 10px; width: 12px;'></h5>
+          </div>
+      </div>
+      <div class='team-description'>
+        {{team.description}}
+        <textarea name="name" rows="8" cols="71" ng-model='$parent.description' ng-if='!team.description || show'></textarea>
+      </div>
+      <button id='save' ng-click='updateDetails(description, team.teamid, team.weekid, team.description, team.year); getTeamsTwo(); $parent.show = !$parent.show' ng-if="!((team.description) && !show)">Save</button>
+      <button id='edit' ng-click='$parent.show = !$parent.show' ng-if="team.description && !show">Edit</button>
+    </div>
+  </div>
+</div>
