@@ -73,4 +73,22 @@ angular.module('chasepn').service('mainService', function($http, $sce){
     })
   }
 
+  this.upload = function(obj){
+    console.log(obj);
+    return $http({
+      method: 'PUT',
+      url: '/rankings/image',
+      data: obj
+    })
+  }
+
+  this.saveTitle = function(obj){
+    console.log(obj);
+    return $http({
+      method: 'PUT',
+      url: '/title',
+      data: obj
+    })
+  }
+
 })

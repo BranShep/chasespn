@@ -70,6 +70,18 @@ module.exports = {
     db.get_all_teams(function(err, teams){
       res.json(teams);
     })
+  },
+
+  upload: function(req, res, next){
+    db.upload([req.body.file, req.body.week, req.body.year], function(err,image){
+      res.json(image);
+    })
+  },
+
+  saveTitle: function(req, res, next){
+    db.save_title([req.body.title, req.body.week, req.body.year], function(err, title){
+        res.json(title);
+    })
   }
 
 }

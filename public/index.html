@@ -3,22 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta property="og:url"           content="http://localhost:3000/#/home" />
-  	<meta property="og:type"          content="website" />
-  	<meta property="og:title"         content="chasESPN.com" />
-  	<meta property="og:description"   content="Your description" />
-  	<meta property="og:image"         content="http://localhost:3000/#/home" />
+
+    <meta property="og:url"                content="http://www.chasespn.com/" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="NBA Power Rankings: As Cavaliers slide, Warriors claim throne" />
+    <meta property="og:description"        content="How much does culture influence creative thinking?" />
+    <meta property="og:image"              content="./images/jazz.png" />
+
     <link rel="stylesheet" type="text/css" href="/css/base.css">
     <link rel="stylesheet" href="/css/styles.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui-ieshiv.js">
     <link rel="stylesheet" href="./node_modules/angular-material/angular-material.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./node_modules/angular-ui-bootstrap/angular-material.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/ab2b416605.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
-    <title>ChasePN</title>
+    <title>chaSEPN</title>
   </head>
   <body ng-controller='homeCtrl'>
 
           <ui-view></ui-view>
+
           <div id="fb-root"></div>
           <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -27,7 +32,11 @@
             js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1219578184786998";
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+
           <!-- Compiled and minified JavaScript -->
 
           <script
@@ -56,6 +65,11 @@
 
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.0/ui-bootstrap-tpls.min.js"></script>
+
+          <script src="/bower_components/toastr/toastr.min.js"></script> 
+          <script src="/bower_components/aws-sdk/dist/aws-sdk.min.js"></script>
+
           <script src="//cdn.auth0.com/js/lock-9.0.min.js"></script>
           <script src="./bower_components/auth0-lock/build/lock.js"></script>
           <script src="./bower_components/angular-lock/dist/angular-lock.js"></script>
@@ -73,6 +87,11 @@
     <script src="/js/services/mainService.js"></script>
     <script src="/js/routes.js"></script>
     <script src="/js/app.run.js"></script>
+    <script src="/js/controllers/modalCtrl.js"></script>
+    <script src="/js/controllers/modalInstanceCtrl.js"></script>
+    <script src="/js/components/modalComponent.js"></script>
+    <script src="/js/components/commentsDir.js"></script>
+    <script src="/js/components/amazonDir.js"></script>
     <script src="/js/controllers/login.controller.js"></script>
     <script src="/js/controllers/home.controller.js"></script>
     <script src="/js/services/auth.service.js"></script>

@@ -46,10 +46,12 @@ app.get('/teams', databaseCtrl.getTeamsTwo);
 app.get('/description', databaseCtrl.getDescriptions);
 app.post('/rankings', databaseCtrl.updateRankings);
 app.put('/rankings', databaseCtrl.updateDetails);
+app.put('/rankings/image', databaseCtrl.upload);
 app.put('/record', databaseCtrl.updateRecord);
 app.get('/weeks', databaseCtrl.getWeeks);
 app.post('/weeks', databaseCtrl.updateWeeks);
 app.get('/allTeams', databaseCtrl.getAllTeams);
+app.put('/title', databaseCtrl.saveTitle);
 
 app.listen('3000', function(){
   console.log("Successfully listening on : 3000");

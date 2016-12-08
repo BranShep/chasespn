@@ -1,3 +1,4 @@
+
 .main {
   width: 739px;
   margin: auto;
@@ -18,6 +19,7 @@
 
 
 .whole {
+  margin-top: 44px;
   background: #EDEEF0;
 }
 
@@ -211,6 +213,9 @@ h2 {
 
 
 .nav {
+  position: fixed;
+  top: 0px;
+  z-index: 2000;
   height: 44px;
   width: 100%;
   background: #2B2C2D;
@@ -279,6 +284,7 @@ h2 {
 }
 
 .main-title {
+  padding-top: 15px;
   font-size: 24px;
   line-height: 1.2em;
   font-weight: 700;
@@ -295,6 +301,23 @@ h2 {
 
 textarea {
   width: 100%;
+}
+
+.title-container {
+  padding-right: 75px;
+  padding-left: 75px;
+  text-align: center;
+}
+
+#title {
+  margin-bottom: 25px;
+}
+
+@media (max-width: 800px) {
+  .title-container {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
 }
 
 .previous-weeks {
@@ -318,4 +341,95 @@ textarea {
   width: calc(100% - 36px);
   border-radius: 5px;
   color: #06c;
+}
+
+.facebook-container {
+  position: fixed;
+  z-index: 800;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: .4;
+}
+
+.face_book {
+  left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+
+    position:fixed;
+  width: 640px;
+  height: 90%;
+  z-index: 1000;
+  background: white;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 5px;
+}
+
+.comments-container {
+  overflow-y:scroll;
+  height: 80%;
+}
+
+.comments-title {
+
+}
+
+.comments {
+  color: #6c6d6f;
+font-size: 10px;
+line-height: 14px;
+margin-bottom: 22px;
+padding-left: 12px;
+padding-right: 12px;
+}
+
+.exit {
+  position: fixed;
+  top: 5px;
+  right: 12px;
+  font-size: 25px;
+  color: #6c6d6f;
+  font-family: sans-serif;
+}
+
+@media (max-width: 600px) {
+  .face_book {
+    z-index: 3000;
+    background: white;
+    padding-left: 15px;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+.upload {
+  width: 300px;
+  margin:auto;
+  text-align: center;
+  border: 1px solid #a5a6a7;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px #6c6d6f;
+}
+
+.upload h3 {
+  font-weight: bold;
+}
+
+.upload input {
+  width: 225px;
+  margin: auto;
+}
+#upload-button {
+  background: #617AC6;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  border: none;
 }

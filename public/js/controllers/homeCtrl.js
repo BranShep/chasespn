@@ -1,5 +1,65 @@
-angular.module('chasepn').controller('homeCtrl', function($scope, mainService){
+angular.module('chasepn').controller('homeCtrl', function($scope, mainService, $document){
   $scope.test = 'Hello there angular';
+
+  $scope.getFacebook = function() {
+      FB.ui({
+          method: 'share',
+          href: 'http://www.chasespn.com/',
+          display: 'popup',
+          mobile_iframe: true
+      });
+  }
+
+  window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));
+
+  $scope.show= false;
+
+// $scope.week = 0;
+
+
+  $scope.enter = function(){
+
+    document.body.style.overflow = 'hidden';
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1219578184786998',
+            xfbml      : true,
+            version    : 'v2.2'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    FB.XFBML.parse();
+  }
+
+
+  $scope.exit = function(){
+    document.body.style.overflow = 'visible';
+    console.log($scope.show);
+  }
 
   console.log('in home ctrl');
 

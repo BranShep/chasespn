@@ -1,11 +1,35 @@
-
+<nav class='nav'>
+  <ul style="color:white;">
+    <li ng-if="isAuthenticated">{{ vm.profile.name }}</li>
+    <li ng-if="!isAuthenticated" ng-click="vm.authService.login()">Login</li>
+    <li ng-if="isAuthenticated" ng-click="vm.authService.logout()">Logout</li>
+    <img ng-src="{{ vm.profile.picture }}" ng-if="isAuthenticated">
+  </ul>
+</nav>
 <div class='whole'>
   <div class='main'>
-    <h1 style='text-align: center; margin-top: 0px;'>Week {{currentWeek}} rankings</h1>
-    <div class='previous-weeks'>
-      <!-- <h4>Previous rankings:</h4> -->
-      <!-- <h4 ng-repeat='week in weeks'>{{week.number}} |</h4> -->
-    </div>
+    <h1 style='text-align: center; margin-top: 0px; border-bottom: 1px solid black; '>Week {{currentWeek}} rankings</h1>
+        <div class='title-container'>
+          <h3>Week title</h3>
+          {{teams[0].title}}
+          <textarea id='title' rows="8" cols="71" ng-model='title'></textarea>
+          <button id='upload-button' style='margin-bottom: 25px;' ng-click='saveTitle(title, teams[0].weekid, teams[0].year )'>Save</button>
+        </div>
+        <img class='main-img' src= {{teams[0].mainimage}} >
+          <div class='upload'>
+                <h3 class="panel-title" style='margin-bottom: 15px; text-align: center;'>Upload Week Image</h3>
+
+
+                <input class="bottom-marg-15" type="file" name="file" file style='text-align: center;'></input>
+                <!-- Progress Bar -->
+                <div class="progress" style='margin-bottom: 15px; margin-top: 15px;'>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
+                    {{ uploadProgress == 0 ? '' : uploadProgress + '%' }}
+                  </div>
+                </div>
+                <button id='upload-button' ng-click="upload(teams[0].weekid, teams[0].year)">Upload</button>
+          </div>
+
     <div class='team' ng-repeat='team in teams'>
       <div class='logo-info'>
           <img src= '{{team.image}}'>
