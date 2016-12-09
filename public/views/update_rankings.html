@@ -1,9 +1,9 @@
 <nav class='nav'>
   <ul style="color:white;">
-    <li ng-if="isAuthenticated">{{ vm.profile.name }}</li>
+    <li ng-if="isAuthenticated">{{name}}</li>
     <li ng-if="!isAuthenticated" ng-click="vm.authService.login()">Login</li>
     <li ng-if="isAuthenticated" ng-click="vm.authService.logout()">Logout</li>
-    <img ng-src="{{ vm.profile.picture }}" ng-if="isAuthenticated">
+    <img ng-src="{{profilePic}}" ng-if="isAuthenticated" onclick="openNav()">
   </ul>
 </nav>
 <div class='whole'>

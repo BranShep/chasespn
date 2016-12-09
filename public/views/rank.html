@@ -1,3 +1,11 @@
+<nav class='nav'>
+  <ul style="color:white;">
+    <li ng-if="isAuthenticated">{{name}}</li>
+    <li ng-if="!isAuthenticated" ng-click="authService.login()">Login</li>
+    <li ng-if="isAuthenticated" ng-click="authService.logout()">Logout</li>
+    <img ng-src="{{profilePic}}" ng-if="isAuthenticated" onclick="openNav()">
+  </ul>
+</nav>
 <section class='rank-section'>
   <h1>Week {{currentWeek}} rankings</h1>
   {{date}}

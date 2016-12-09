@@ -1,4 +1,10 @@
-angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $location, $filter){
+angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $location, $filter, authService){
+
+  $scope.user = JSON.parse(localStorage.getItem('profile'));
+  $scope.name = $scope.user.name;
+  $scope.profilePic = $scope.user.picture;
+
+
   $scope.d = new Date();
   var newDate = new Date();
   $scope.dateTwo = newDate.toDateString();

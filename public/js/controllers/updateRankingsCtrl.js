@@ -1,5 +1,11 @@
-angular.module('chasepn').controller('updateRankingsCtrl', function($scope, mainService, $location){
+angular.module('chasepn').controller('updateRankingsCtrl', function($scope, mainService, $location, authService){
   $scope.test = 'Hello there angular';
+
+  $scope.user = JSON.parse(localStorage.getItem('profile'));
+  $scope.name = $scope.user.name;
+  $scope.profilePic = $scope.user.picture;
+
+  console.log($scope.username);
 
   $scope.getTeamsTwo = function(){
         var d = new Date();

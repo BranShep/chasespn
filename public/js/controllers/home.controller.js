@@ -14,11 +14,12 @@
     vm.authService = authService;
 
     console.log('in home controller');
-    
+
     authService.getProfileDeferred().then(function (profile) {
      vm.profile = profile;
    });
 
+   
   }
 
 }());
