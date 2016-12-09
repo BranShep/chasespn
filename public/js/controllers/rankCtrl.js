@@ -1,5 +1,11 @@
-angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $location){
+angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $location, $filter){
   $scope.d = new Date();
+  var newDate = new Date();
+  $scope.dateTwo = newDate.toDateString();
+  $scope.dateTwo = $scope.dateTwo.slice(4);
+  console.log($scope.dateTwo);
+  $scope.dateTwo = $scope.dateTwo.slice(0, 6) + ',' + ' ' + $scope.dateTwo.slice(-4);
+  console.log($scope.dateTwo);
   console.log($scope.d.getMonth());
   if($scope.d.getMonth() === 1 || $scope.d.getMonth() === 2 || $scope.d.getMonth() === 3 || $scope.d.getMonth() === 4 || $scope.d.getMonth() === 5 || $scope.d.getMonth() === 6){
     $scope.date = ($scope.d.getFullYear() - 1).toString();
@@ -41,7 +47,7 @@ angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $
 
   $scope.rankingsArr = [];
 
-  $scope.sumbitRankings = function(rankings, week, year){
+  $scope.sumbitRankings = function(rankings, week, year, date){
     console.log(rankings);
     console.log(week);
 
@@ -74,7 +80,8 @@ angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $
         previous_ranking : Number(rankings[i].ranking),
         year : year,
         position : position,
-        name: rankings[i].name
+        name: rankings[i].name,
+        date: date
       };
       $scope.updateRankings(newObj);
     }

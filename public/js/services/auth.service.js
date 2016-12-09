@@ -64,8 +64,10 @@
         $rootScope.$on('$stateChangeStart', function(event, nextRoute) {
           if (nextRoute.controller === 'AdminController' || nextRoute.controller === 'rankCtrl' || nextRoute.controller === 'updateRankingsCtrl') {
             if (!isAdmin()) {
+
               alert('You are not allowed to see the Admin content');
               return event.preventDefault();
+
             }
           }
         });

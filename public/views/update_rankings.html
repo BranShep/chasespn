@@ -8,15 +8,16 @@
 </nav>
 <div class='whole'>
   <div class='main'>
-    <h1 style='text-align: center; margin-top: 0px; border-bottom: 1px solid black; '>Week {{currentWeek}} rankings</h1>
+    <h1 style='text-align: center; margin-top: 0px; padding-bottom: 15px; padding-top: 10px;color: white; background: red; '>Week {{currentWeek}} rankings</h1>
         <div class='title-container'>
-          <h3>Week title</h3>
-          {{teams[0].title}}
-          <textarea id='title' rows="8" cols="71" ng-model='title'></textarea>
-          <button id='upload-button' style='margin-bottom: 25px;' ng-click='saveTitle(title, teams[0].weekid, teams[0].year )'>Save</button>
+          <h3 ng-hide='showTitle'>Week title</h3>
+          <h1 ng-show='showTitle'>{{teams[0].title}}</h1>
+          <textarea id='title' rows="8" cols="71" ng-model='title' ng-hide='showTitle'></textarea>
+          <button id='upload-button' style='margin-bottom: 25px;' ng-hide='showTitle' ng-click='saveTitle(title, teams[0].weekid, teams[0].year); showTitle = !showTitle'>Save</button>
+          <button id='upload-button' style='margin-bottom: 25px;' ng-show='showTitle' ng-click='showTitle = !showTitle'>Edit</button>
         </div>
         <img class='main-img' src= {{teams[0].mainimage}} >
-          <div class='upload'>
+          <div class='upload' ng-hide='showUpload' style='margin-top: 25px;'>
                 <h3 class="panel-title" style='margin-bottom: 15px; text-align: center;'>Upload Week Image</h3>
 
 
@@ -40,11 +41,14 @@
           </div>
       </div>
       <div class='team-description'>
-        {{team.description}}
-        <textarea name="name" rows="8" cols="71" ng-model='$parent.description' ng-if='!team.description || show'></textarea>
+        <div ng-show='showText'>{{team.description}}</div>
+        <textarea name="name" rows="8" cols="71" ng-model='team.description' ng-hide='showText'></textarea>
       </div>
-      <button id='save' ng-click='updateDetails(description, team.teamid, team.weekid, team.description, team.year); getTeamsTwo(); $parent.show = !$parent.show' ng-if="!((team.description) && !show)">Save</button>
-      <button id='edit' ng-click='$parent.show = !$parent.show' ng-if="team.description && !show">Edit</button>
+
+      <!-- <button id='edit' ng-click='$parent.show = !$parent.show' ng-if="team.description && !show">Edit</button> -->
+    </div>
+    <div class='save'>
+      <button id='save' ng-click='updateDetails(teams, teams[0].weekid, teams[0].year); getTeamsTwo(); '>Save</button>
     </div>
   </div>
 </div>

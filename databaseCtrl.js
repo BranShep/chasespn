@@ -32,7 +32,7 @@ module.exports = {
 
   updateRankings: function(req, res, next){
     console.log(req.body);
-    db.post_rankings([req.body.week, req.body.teamid, req.body.ranking, req.body.previous_ranking, req.body.year, req.body.position, req.body.name], function(err, ranking){
+    db.post_rankings([req.body.week, req.body.teamid, req.body.ranking, req.body.previous_ranking, req.body.year, req.body.position, req.body.name, req.body.date], function(err, ranking){
       console.log(err, ranking);
       console.log(ranking);
       res.json(ranking);

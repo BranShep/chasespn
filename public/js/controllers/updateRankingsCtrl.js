@@ -1,6 +1,5 @@
-angular.module('chasepn').controller('updateRankingsCtrl', function($scope, mainService){
+angular.module('chasepn').controller('updateRankingsCtrl', function($scope, mainService, $location){
   $scope.test = 'Hello there angular';
-
 
   $scope.getTeamsTwo = function(){
         var d = new Date();
@@ -27,33 +26,40 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($scope, main
 
       mainService.getTeams(newObj).then(function(response){
         $scope.teams = response.data;
+        $scope.title = $scope.teams[0].title;
       })
     })
   }
 
   $scope.getTeamsTwo();
 
+
+
   $scope.description;
   $scope.record;
 
-  $scope.updateDetails = function(description, teamid, weekid, tdesc, year){
+  $scope.updateDetails = function(teams, weekid, year){
 
     console.log(year);
-
-    if(description === undefined){
-      description = tdesc;
+    for (var i = 0; i <= teams.length; i++){
+      var newObj = {
+        description: teams[i].description,
+        teamid: teams[i].teamid,
+        weekid: weekid,
+        year: year
+      }
+      mainService.updateDetails(newObj).then(function(response){
+        location.reload();
+      })
     }
 
-    var newObj = {
-      description: description,
-      teamid: teamid,
-      weekid: weekid,
-      year: year
-    }
+    // if(description === undefined){
+    //   description = tdesc;
+    // }
 
-    mainService.updateDetails(newObj).then(function(response){
-        // $scope.getTeamsTwo($scope.date);
-    })
+
+
+
   }
 
   $scope.newStandings=[];
@@ -137,6 +143,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($scope, main
               // Upload Successfully Finished
               toastr.success('File Uploaded Successfully', 'Done');
 
+              $scope.getTeamsTwo();
               // Reset The Progress Bar
               setTimeout(function() {
                 $scope.uploadProgress = 0;
