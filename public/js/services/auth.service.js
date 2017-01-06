@@ -6,9 +6,9 @@
     .module('chasepn')
     .service('authService', authService);
 
-  authService.$inject = ['$q', 'lock', 'authManager', '$location', '$rootScope'];
+  authService.$inject = ['$q', 'lock', 'authManager', '$location', '$rootScope', '$state'];
 
-  function authService($q, lock, authManager, $location, $rootScope) {
+  function authService($q, lock, authManager, $location, $rootScope, $state) {
 
     var userProfile = JSON.parse(localStorage.getItem('profile')) || null;
         var deferredProfile = $q.defer();

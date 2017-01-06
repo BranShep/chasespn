@@ -1,24 +1,30 @@
 angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $location, $filter, authService){
 
+  $scope.items = ["hello", 'hi', 'poo'];
+
+  $scope.click = function(teamsTwo){
+    console.log(teamsTwo);
+  }
+//Set user
   $scope.user = JSON.parse(localStorage.getItem('profile'));
   $scope.name = $scope.user.name;
   $scope.profilePic = $scope.user.picture;
 
-
+//Get current NBA season year in 2016-17 format
   $scope.d = new Date();
   var newDate = new Date();
   $scope.dateTwo = newDate.toDateString();
   $scope.dateTwo = $scope.dateTwo.slice(4);
-  console.log($scope.dateTwo);
   $scope.dateTwo = $scope.dateTwo.slice(0, 6) + ',' + ' ' + $scope.dateTwo.slice(-4);
-  console.log($scope.dateTwo);
-  console.log($scope.d.getMonth());
-  if($scope.d.getMonth() === 1 || $scope.d.getMonth() === 2 || $scope.d.getMonth() === 3 || $scope.d.getMonth() === 4 || $scope.d.getMonth() === 5 || $scope.d.getMonth() === 6){
+
+  if($scope.d.getMonth() === 0 || $scope.d.getMonth() === 1 || $scope.d.getMonth() === 2 || $scope.d.getMonth() === 3 || $scope.d.getMonth() === 4 || $scope.d.getMonth() === 5){
     $scope.date = ($scope.d.getFullYear() - 1).toString();
     console.log($scope.date);
     var date = $scope.date.slice(2,5);
     var dateTwo = (Number(date) + 1).toString();
     $scope.date = $scope.date + '-' + dateTwo;
+  }else if($scope.d.getMonth() === 6 || $scope.d.getMonth() === 7 || $scope.d.getMonth() === 8){
+    $scope.date = 'Off-season';
   }else {
     $scope.date = $scope.d.getFullYear().toString();
     var date = $scope.date.slice(2,5);
@@ -26,12 +32,13 @@ angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $
     $scope.date = $scope.d.getFullYear().toString() + '-' + dateTwo;
   }
 
+//Get teams from datbase in order of previous week's rankings
   $scope.getTeamsTwo = function(year){
-    mainService.getTeamsTwo().then(function(response){
+    mainService.getTeamsTwo(year).then(function(response){
       $scope.currentWeek = response.data[0].max + 1;
       $scope.previousWeek = response.data[0].max;
-
-      if ($scope.currentWeek === 1) {
+      console.log($scope.previousWeek);
+      if ($scope.previousWeek === null) {
         mainService.getAllTeams().then(function(response){
           $scope.teamsTwo = response.data;
         })
@@ -53,6 +60,7 @@ angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $
 
   $scope.rankingsArr = [];
 
+//After admin has selected order of rankings this function will sumbit new rankings to database
   $scope.sumbitRankings = function(rankings, week, year, date){
     console.log(rankings);
     console.log(week);
@@ -100,6 +108,5 @@ angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $
       $location.path( "/update_rankings" );
     })
   }
-
 
 });

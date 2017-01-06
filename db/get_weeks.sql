@@ -1,1 +1,1 @@
-SELECT week FROM weeks ORDER BY week DESC;
+SELECT weekid FROM temp WHERE year=$1 ORDER BY weekid DESC;

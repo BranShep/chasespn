@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html ng-app='chasepn'>
   <head>
+    <meta name="fragment" content="!">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <meta property="og:url"                content="http://www.chasespn.com/" />
+    <meta property="og:url"                content="http://www.chasepn.com" />
     <meta property="og:type"               content="article" />
-    <meta property="og:title"              content="NBA Power Rankings: As Cavaliers slide, Warriors claim throne" />
-    <meta property="og:description"        content="How much does culture influence creative thinking?" />
-    <meta property="og:image"              content="./images/jazz.png" />
-
+    <meta property="og:description"              content='Check out www.chasepn.com to see how Chase Martin ranks your favorite NBA teams.' />
+     <meta property="og:title"              content='NBA Power Rankings' />
+    <meta property="og:image"              content='https://s3-us-west-2.amazonaws.com/chasepn/nba.jpg'  />
+    <link rel="icon" href="/images/chase.jpg">
     <link rel="stylesheet" type="text/css" href="/css/base.css">
     <link rel="stylesheet" href="/css/styles.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui-ieshiv.js">
@@ -18,15 +19,43 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/ab2b416605.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="./node_modules/ng-sortable/dist/ng-sortable.min.css">
     <title>chaSEPN</title>
   </head>
   <body ng-controller='homeCtrl'>
-    <div id="mySidenav" class="sidenav">
+	
+
+  <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class='exit' data-dismiss="modal">X</div>
+          <div class='comments-title'>
+            <h1 class='main-title' style='font-size: 20px;'>{{teams[0].title}}</h1>
+          </div>
+          <div class="modal-body">
+            <!-- <div class='comments-container'> -->
+                <div class='comments'>
+                  <h4 style='color: black'>Comments</h4>
+                  <p>Use a Facebook account to add a comment, subject to Facebook's Terms of Service and Privacy Policy. Your Facebook name, photo & other personal information you make public on Facebook will appear with your comment, and may be used on chaSEPN's media platforms. Learn more.</p>
+                </div>
+                  <poop></poop>
+            <!-- </div> -->
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+
+     <div id="mySidenav" class="sidenav">   
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a ui-sref="home">Home</a>
-      <a ui-sref="rank">New Rankings</a>
-      <a ui-sref="update_rankings">Update Rankings</a>
-      <a ui-sref="home">Chase Martin</a>
+      <a ui-sref="home" onclick="closeNav()">Home</a>
+      <a ui-sref="rank" onclick="closeNav()">New Rankings</a>
+      <a ui-sref="update_rankings" onclick="closeNav()">Update Rankings</a>
+      <a ui-sref="home" onclick="closeNav()" ng-click="authService.logout()">Log out</a>
     </div>
 
     <script type="text/javascript">
@@ -39,8 +68,15 @@
               document.getElementById("mySidenav").style.width = "0";
           }
     </script>
+    
+    <script
+       type="text/javascript"
+       async defer
+       src="//assets.pinterest.com/js/pinit.js"
+    ></script>
 
-          <ui-view></ui-view>
+
+          <ui-view autoscroll="false"></ui-view>
 
           <div id="fb-root"></div>
           <script>(function(d, s, id) {
@@ -53,23 +89,24 @@
 
 
 
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
           <!-- Compiled and minified JavaScript -->
-
-          <script
-              src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"
-              integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-              crossorigin="anonymous">
-          </script>
 
           <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
           <!--ANGULAR ANGULAR -->
+          <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
-
-
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+          <script type="text/javascript" src="./node_modules/ng-sortable/dist/ng-sortable.min.js"></script>
+          <script src="https://rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
           <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.15.0/sortable.js"></script>
 
           <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -77,42 +114,31 @@
           <!--UI ROUTER-->
           <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.js"></script>
 
-          <!--Slick Carousel-->
-
-          <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
           <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.0/ui-bootstrap-tpls.min.js"></script>
-
-          <script src="/bower_components/toastr/toastr.min.js"></script>
-          <script src="/bower_components/aws-sdk/dist/aws-sdk.min.js"></script>
-
+          <script src="./node_modules/toastr/build/toastr.min.js"></script>
+          <script src="./node_modules/aws-sdk/dist/aws-sdk.min.js"></script>
           <script src="//cdn.auth0.com/js/lock-9.0.min.js"></script>
-          <script src="./bower_components/auth0-lock/build/lock.js"></script>
-          <script src="./bower_components/angular-lock/dist/angular-lock.js"></script>
-          <script src="./bower_components/angular-jwt/dist/angular-jwt.js"></script>
-          <script src='./node_modules/angular-animate/angular-animate.js'></script>
+          <script src="./node_modules/angular-lock/dist/angular-lock.js"></script>
+          <script src="./node_modules/angular-jwt/dist/angular-jwt.js"></script>
           <script src='./node_modules/angular-aria/angular-aria.js'></script>
           <script src='./node_modules/angular-material/angular-material.js'></script>
           <script src='./node_modules/angular-storage/dist/angular-storage.js'></script>
           <script src='./node_modules/auth0-angular/build/auth0-angular.js'></script>
-
-    <script src="/js/app.js"></script>
-    <script src="/js/controllers/homeCtrl.js"></script>
-    <script src="/js/controllers/updateRankingsCtrl.js"></script>
-    <script src="/js/controllers/rankCtrl.js"></script>
-    <script src="/js/services/mainService.js"></script>
-    <script src="/js/routes.js"></script>
-    <script src="/js/app.run.js"></script>
-    <script src="/js/controllers/modalCtrl.js"></script>
-    <script src="/js/controllers/modalInstanceCtrl.js"></script>
-    <script src="/js/components/modalComponent.js"></script>
-    <script src="/js/components/commentsDir.js"></script>
-    <script src="/js/components/amazonDir.js"></script>
-    <script src="/js/controllers/login.controller.js"></script>
-    <script src="/js/controllers/home.controller.js"></script>
-    <script src="/js/services/auth.service.js"></script>
-    <script src="/js/controllers/admin.controller.js"></script>
+          <script src="/js/app.js"></script>
+          <script src="/js/controllers/homeCtrl.js"></script>
+          <script src="/js/controllers/updateRankingsCtrl.js"></script>
+          <script src="/js/controllers/rankCtrl.js"></script>
+          <script src="/js/services/mainService.js"></script>
+          <script src="/js/routes.js"></script>
+          <script src="/js/app.run.js"></script>
+          <script src="/js/controllers/sortableController.js"></script>
+          <script src="/js/components/commentsDir.js"></script>
+          <script src="/js/components/amazonDir.js"></script>
+          <script src="/js/controllers/login.controller.js"></script>
+          <script src="/js/controllers/home.controller.js"></script>
+          <script src="/js/services/auth.service.js"></script>
+          <script src="/js/controllers/admin.controller.js"></script>
+          <script src="http://cdn.auth0.com/js/lock/10.7.3/lock.min.js"></script>
   </body>
 </html>

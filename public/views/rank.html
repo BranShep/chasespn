@@ -1,27 +1,33 @@
 <nav class='nav'>
+ <div id='logo-div'>
+ </div>
+  <img id='logo' src='  
+https://s3-us-west-2.amazonaws.com/chasepn/chasespn.png'>
   <ul style="color:white;">
-    <li ng-if="isAuthenticated">{{name}}</li>
-    <li ng-if="!isAuthenticated" ng-click="authService.login()">Login</li>
-    <li ng-if="isAuthenticated" ng-click="authService.logout()">Logout</li>
-    <img ng-src="{{profilePic}}" ng-if="isAuthenticated" onclick="openNav()">
-  </ul>
+    <li id='login'  ng-if="!isAuthenticated" ng-click="vm.authService.login()">Login</li>
+    <a id='hamburger' ng-if="isAuthenticated" onclick="openNav()" style='color: white; font-size: 30px; margin-right: 15px;'><i class="fa fa-bars" aria-hidden="true"></i></a>
+    <a id='profile' ng-if='isAuthenticated' onclick='openNav()'style='color: white; font-size: 30px; margin-right: 15px;'><i class="fa fa-user" aria-hidden="true"></i></a>
+   </ul>
 </nav>
 <section class='rank-section'>
   <h1>Week {{currentWeek}} rankings</h1>
   {{date}}
 
-      <div ui-sortable ng-model="teamsTwo" class="sortable-container">
-          <div ng-repeat="team in teamsTwo" class='poo'>
-                    <div class="row">
-                        {{$index + 1}}
-                    </div>
-                   <div "row">
-                       <img id='sortable-image' src={{team.image}}>
-                   </div>
-                   <div class="team_name">
-                       {{team.name}}
-                   </div>
-          </div>
-      </div>
-      <button type="button" name="button" ng-click='sumbitRankings(teamsTwo, currentWeek, date, dateTwo)'>Submit Rankings</button>
+        <div class='sortable-div' ng-controller="sortableController">
+     <ul ui-sortable="sortableOptions" ng-model="teamsTwo" class='sortable-container'>
+       <li ng-repeat="team in teamsTwo" class="poo">
+           <div class="myHandle">
+               {{$index + 1}}
+           </div>
+            <div "row">
+                <img id='sortable-image' src={{team.image}}>
+            </div>
+            <div class="team_name">
+                {{team.name}}
+            </div>
+       </li>
+     </ul>
+   </div>
+      <button class='submit-button' type="button" name="button" ng-click='sumbitRankings(teamsTwo, currentWeek, date, dateTwo)'>Submit Rankings</button>
 </section>
+

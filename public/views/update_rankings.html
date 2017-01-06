@@ -1,27 +1,31 @@
 <nav class='nav'>
+ <div id='logo-div'>
+ </div>
+  <img id='logo' src='  
+https://s3-us-west-2.amazonaws.com/chasepn/chasespn.png'>
   <ul style="color:white;">
-    <li ng-if="isAuthenticated">{{name}}</li>
-    <li ng-if="!isAuthenticated" ng-click="vm.authService.login()">Login</li>
-    <li ng-if="isAuthenticated" ng-click="vm.authService.logout()">Logout</li>
-    <img ng-src="{{profilePic}}" ng-if="isAuthenticated" onclick="openNav()">
-  </ul>
+    <li id='login'  ng-if="!isAuthenticated" ng-click="vm.authService.login()">Login</li>
+    <a id='hamburger' ng-if="isAuthenticated" onclick="openNav()" style='color: white; font-size: 30px; margin-right: 15px;'><i class="fa fa-bars" aria-hidden="true"></i></a>
+    <a id='profile' ng-if='isAuthenticated' onclick='openNav()'style='color: white; font-size: 30px; margin-right: 15px;'><i class="fa fa-user" aria-hidden="true"></i></a>
+   </ul>
 </nav>
 <div class='whole'>
   <div class='main'>
-    <h1 style='text-align: center; margin-top: 0px; padding-bottom: 15px; padding-top: 10px;color: white; background: red; '>Week {{currentWeek}} rankings</h1>
-        <div class='title-container'>
-          <h3 ng-hide='showTitle'>Week title</h3>
-          <h1 ng-show='showTitle'>{{teams[0].title}}</h1>
-          <textarea id='title' rows="8" cols="71" ng-model='title' ng-hide='showTitle'></textarea>
-          <button id='upload-button' style='margin-bottom: 25px;' ng-hide='showTitle' ng-click='saveTitle(title, teams[0].weekid, teams[0].year); showTitle = !showTitle'>Save</button>
-          <button id='upload-button' style='margin-bottom: 25px;' ng-show='showTitle' ng-click='showTitle = !showTitle'>Edit</button>
+	 <h1 style='text-align: center; margin-top: 0px; padding-bottom: 15px; padding-top: 10px; '>Week {{currentWeek}} rankings</h1>
+        <div class='delete' style='text-align: center; width: 100%;'>  
+         <button ng-click="deleteWeek(teams[0].weekid, teams[0].year)" style='margin: auto;'>Delete Week</button>
+        </div>
+         <div class='title-container'>
+          <h3>Week title</h3>
+          <textarea id='title' rows="8" cols="71" ng-model='teams[0].title'></textarea>
+         <button id='upload-button' style='margin-bottom: 25px;' ng-click='saveTitle(teams[0].title, teams[0].weekid, teams[0].year);'>Save</button>
         </div>
         <img class='main-img' src= {{teams[0].mainimage}} >
           <div class='upload' ng-hide='showUpload' style='margin-top: 25px;'>
                 <h3 class="panel-title" style='margin-bottom: 15px; text-align: center;'>Upload Week Image</h3>
 
 
-                <input class="bottom-marg-15" type="file" name="file" file style='text-align: center;'></input>
+                <input class="bottom-marg-15" type="file" file style='text-align: center;' onchange="angular.element(this).scope().setFile(this)"></input>
                 <!-- Progress Bar -->
                 <div class="progress" style='margin-bottom: 15px; margin-top: 15px;'>
                   <div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
@@ -37,7 +41,7 @@
           <div class='team-rankings'>
             <h4>{{team.ranking}}. <a style='color: #0066CC;'>{{team.name}}</a></h4>
             <h5>2016-17 record: {{team.record}}</h5>
-            <h5><a style='color: #0066CC;'>Previous ranking</a>: {{team.previous_ranking}} <img src = {{team.position}} style='height: 10px; width: 12px;'></h5>
+            <h5 ng-if='teams[0].previous_ranking'><a style='color: #0066CC;'>Previous ranking</a>: {{team.previous_ranking}} <img src = {{team.position}} style='height: 10px; width: 12px;'></h5>
           </div>
       </div>
       <div class='team-description'>
@@ -50,5 +54,6 @@
     <div class='save'>
       <button id='save' ng-click='updateDetails(teams, teams[0].weekid, teams[0].year); getTeamsTwo(); '>Save</button>
     </div>
+    <button id='live' ng-click='makeLive(teams[0].weekid, teams[0].year);'>Go Live</button>
   </div>
 </div>

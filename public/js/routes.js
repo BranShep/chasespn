@@ -1,5 +1,5 @@
 angular.module('chasepn')
-    .config(function($stateProvider, $urlRouterProvider, lockProvider, authProvider, $provide, $httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
+    .config(function($locationProvider, $stateProvider, $urlRouterProvider, lockProvider, authProvider, $provide, $httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
 
         //This is a catch all for our routes
         $urlRouterProvider.otherwise("/home");
@@ -8,7 +8,7 @@ angular.module('chasepn')
             .state('home', {
               url: '/home',
               templateUrl: '/views/home.html',
-              controller: 'HomeController',
+              controller: 'homeCtrl',
               controllerAs: 'vm'
             })
             .state('update_rankings', {
@@ -38,6 +38,10 @@ angular.module('chasepn')
                templateUrl: '/views/admin.html',
                controllerAs: 'vm'
             });
+
+            $locationProvider.html5Mode(false);
+            $locationProvider.hashPrefix('!');
+
 
             lockProvider.init({
                domain: 'shepinho.auth0.com',

@@ -1,3 +1,13 @@
+body {font-family:'Open Sans'; margin:0; 
+&.modal-open { position:fixed; overflow:hidden; 
+    .modal { overflow: scroll;
+        @media only screen and (min-resolution:150dpi) and (max-width: @screen-sm),
+            only screen and (-webkit-min-device-pixel-ratio:1.5) {
+            overflow: scroll; -webkit-overflow-scrolling: touch; 
+        }
+    }
+}   
+}
 
 .main {
   width: 739px;
@@ -10,18 +20,24 @@
 @media (max-width: 800px) {
   .main {
     width: 100%;
-    margin: auto;
+    /*margin: auto;*/
     background: white;
     font-family: Georgia,"Times New Roman",Times,serif;
     font-size: 16px;
   }
 }
 
-
 .whole {
   margin-top: 44px;
   background: #EDEEF0;
+  /*background: white;*/
 }
+
+/*@media (max-width: 500px) {
+  .whole {
+    display: none;
+  }
+}*/
 
 .team {
 
@@ -208,7 +224,6 @@ h2 {
 
 .rank-section {
   width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -285,6 +300,7 @@ h2 {
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
 }
 
 .editor p {
@@ -297,17 +313,26 @@ h2 {
 
 .main-title {
   padding-top: 15px;
-  font-size: 24px;
+  font-size: 36px;
   line-height: 1.2em;
   font-weight: 700;
   color: #1d1e1f;
   margin-right: 15px;
   margin-left: 15px;
   margin-bottom: 20px;
+  margin-top: 0;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 24px;
+  }
 }
 
 .main-img {
   width: 100%;
+  margin: 0;
   height: auto;
 }
 
@@ -367,6 +392,12 @@ textarea {
   height: 100vh;
   background: black;
   opacity: .4;
+}
+
+@media (max-width: 500px) {
+  .facebook-container {
+    display: none;
+  }
 }
 
 .face_book {
@@ -486,8 +517,184 @@ padding-right: 12px;
     margin-left: 50px;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s;
-    padding: 20px;
+.submit-button {
+  height: 40px;
+  background: #617AC6;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 25px;
 }
+
+.myHandle {
+  width: 25%;
+  /*background: #EDEEF0;*/
+  font-size: 12px;
+}
+
+.chase-info {
+  position: absolute;
+  top: 40px;
+  width: 360px;
+  left: 0;
+  background: #fff;
+  border: 1px #dcdddf solid;
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  padding: 20px;
+  color: #6c6d6f;
+    font-family: "BentonSans",-apple-system,"Roboto",Helvetica,Arial,sans-serif;
+    font-size: 11px;
+    line-height: 20px;
+    z-index: 20000;
+}
+
+@media (max-width: 600px) {
+  .chase-info {
+    width: 340px;
+  }
+}
+
+.chase-ul {
+  margin-right: 40px;
+  margin-left: 20px;
+}
+
+#exit-chase {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+}
+
+.arrow-up {
+  position: absolute;
+  top: 32px;
+  left: 12px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+  z-index: 300000;
+}
+
+.twitter-follow-button {
+  margin-left: 90px;
+}
+
+.modal-open {
+    overflow: hidden !important;
+    height: 100%;
+}
+
+.modal-dialog {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.modal-content {
+    height: 100%;
+    min-height: 100%;
+    height: auto;
+    border-radius: 0;
+}
+
+#myModal {
+ height: 97%; 
+ z-index: 30000;
+ margin: 0;
+ width: 100%;
+}
+
+.modal-body {
+    overflow-y: auto;
+    height: 85vh;
+}
+
+.sortable-div {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#logo-div {
+  width: 150px;
+  border-right: 10px solid #B40000;
+  border-left: 10px solid #B40000;
+  height: 100%;
+  border-radius: 0;
+  background: #DD0000;
+  transform: skew(-25deg, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 250px;
+} 
+
+@media (max-width: 1500px) {
+  #logo-div {
+     width: 190px;
+     position: absolute;
+     left: -25px; 
+     margin: 0; 
+  }
+} 
+
+#logo {
+  width: 125px;
+  border: none;
+  height: 80%;
+  border-radius: 0;
+  position: absolute;
+  left: 260px;
+  top: 5px;
+}   
+
+@media (max-width: 1500px) {
+  #logo {
+     position: absolute;
+     left: 10px;
+     top: 5px;
+  }
+}
+
+
+@media (min-width: 800px) {
+  #hamburger {
+     display: none;
+  }
+}
+
+#profile {
+  position: absolute;
+  top: 0px;
+  right: 250px;
+}
+
+@media (max-width: 1500px) {
+  #profile {
+   right: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  #profile {
+    display: none;
+  }
+}
+
+#login {
+  position: absolute;
+  top: 12px;
+  right: 250px;
+  font-weight: bold;
+}
+
+@media (max-width: 1500px) {
+  #login {
+   right: 10px;
+  }
+}
+

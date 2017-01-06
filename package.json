@@ -1,0 +1,33 @@
+{
+  "name": "chasespn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BranShep/chasespn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BranShep/chasespn/issues"
+  },
+  "homepage": "https://github.com/BranShep/chasespn#readme",
+  "dependencies": {
+    "angular-jwt": "^0.1.8",
+    "angular-lock": "^1.0.5",
+    "angular-material": "^1.1.1",
+    "angular-ui-sortable": "^0.16.1",
+    "auth0-angular": "^4.2.7",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "express-jwt": "^5.1.0",
+    "massive": "^2.5.0",
+    "ng-sortable": "^1.3.7",
+    "toastr": "^2.1.2"
+  }
+}

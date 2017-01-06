@@ -1,27 +1,28 @@
-angular.module('chasepn').controller('updateRankingsCtrl', function($scope, mainService, $location, authService){
+angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams, $rootScope, $state, $scope, mainService, $location, authService){
   $scope.test = 'Hello there angular';
-
+  $rootScope.$on('$viewContentLoaded',function(){
+            jQuery('html, body').animate({ scrollTop: 0 }, 200);
+        });
   $scope.user = JSON.parse(localStorage.getItem('profile'));
   $scope.name = $scope.user.name;
   $scope.profilePic = $scope.user.picture;
 
-  console.log($scope.username);
+  $scope.d = new Date();
+  if($scope.d.getMonth() === 0 || $scope.d.getMonth() === 1 || $scope.d.getMonth() === 2 || $scope.d.getMonth() === 3 || $scope.d.getMonth() === 4 || $scope.d.getMonth() === 5){
+    $scope.date = ($scope.d.getFullYear() - 1).toString();
+    console.log($scope.date);
+    var date = $scope.date.slice(2,5);
+    var dateTwo = (Number(date) + 1).toString();
+    $scope.date = $scope.date + '-' + dateTwo;
+  }else {
+    $scope.date = $scope.d.getFullYear().toString();
+    var date = $scope.date.slice(2,5);
+    var dateTwo = (Number(date) + 1).toString();
+    $scope.date = $scope.d.getFullYear().toString() + '-' + dateTwo;
+  }
 
-  $scope.getTeamsTwo = function(){
-        var d = new Date();
-        console.log(d.getMonth());
-        if(d.getMonth() === 1 || d.getMonth() === 2 || d.getMonth() === 3 || d.getMonth() === 4 || d.getMonth() === 5 || d.getMonth() === 6){
-          var da = (d.getFullYear() - 1).toString();
-          console.log(da);
-          var date = da.slice(2,5);
-          var dateTwo = (Number(date) + 1).toString();
-          var year = date + '-' + dateTwo;
-        }else {
-          var da = d.getFullYear().toString();
-          var dat = da.slice(2,5);
-          var dateTwo = (Number(dat) + 1).toString();
-          var year = da + '-' + dateTwo;
-        }
+
+  $scope.getTeamsTwo = function(year){
     mainService.getTeamsTwo(year).then(function(response){
       $scope.currentWeek = response.data[0].max;
 
@@ -29,24 +30,19 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($scope, main
         week: $scope.currentWeek,
         year: year
       }
-
       mainService.getTeams(newObj).then(function(response){
         $scope.teams = response.data;
-        $scope.title = $scope.teams[0].title;
       })
     })
   }
 
-  $scope.getTeamsTwo();
-
-
+  $scope.getTeamsTwo($scope.date);
 
   $scope.description;
   $scope.record;
 
   $scope.updateDetails = function(teams, weekid, year){
 
-    console.log(year);
     for (var i = 0; i <= teams.length; i++){
       var newObj = {
         description: teams[i].description,
@@ -55,7 +51,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($scope, main
         year: year
       }
       mainService.updateDetails(newObj).then(function(response){
-        location.reload();
+         $state.go('home');
       })
     }
 
@@ -84,7 +80,6 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($scope, main
 
   $scope.updateRecord = function(obj){
     mainService.updateRecord(obj).then(function(response){
-      $scope.getTeamsTwo();
     })
   }
 
@@ -101,28 +96,31 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($scope, main
 
     }
 
+  
   $scope.getStandings();
-
-
+  
   $scope.creds = {
     bucket: 'chasepn',
     access_key: 'AKIAJEAOLYQOTZGBNGVA',
     secret_key: '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'
   }
 
+  $scope.setFile = function(element) {
+          $scope.$apply(function($scope) {
+              $scope.file = element.files[0];
+          });
+      }; 
+
   $scope.sizeLimit      = 10585760; // 10MB in Bytes
     $scope.uploadProgress = 0;
 
     $scope.upload = function(week, year) {
-      console.log(week, year);
-      console.log($scope.file);
       var newObj = {
         file: 'https://s3-us-west-2.amazonaws.com/chasepn/' + $scope.file.name,
         week: week,
         year: year
       }
       mainService.upload(newObj).then(function(response){
-        console.log(response);
       })
       AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
       AWS.config.region = 'us-east-1';
@@ -148,8 +146,8 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($scope, main
             else {
               // Upload Successfully Finished
               toastr.success('File Uploaded Successfully', 'Done');
-
-              $scope.getTeamsTwo();
+              
+              $state.reload();
               // Reset The Progress Bar
               setTimeout(function() {
                 $scope.uploadProgress = 0;
@@ -181,8 +179,45 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($scope, main
       }
 
       mainService.saveTitle(newObj).then(function(response){
-        console.log(response);
+         $state.reload();
+      })
+    }
+
+    $scope.deleteWeek = function(week, year) {
+          var x = confirm("Are you sure you want to delete?");
+       if(x){
+	 var newObj = {
+           week: week,
+           year: year
+         }
+          mainService.deleteWeek(newObj).then(function(response){
+            $state.reload();
+          })
+       }else {
+          return false;
+       }    
+    }
+   
+   $scope.deleteWeekTwo = function() {
+      mainService.deleteWeekTwo().then(function(response){
         $scope.getTeamsTwo();
       })
     }
+   
+  $scope.makeLive = function(week, year) {
+    console.log(week,year);
+    var x = confirm("Are you sure you want to go live?");
+       if(x){
+          var newObj = {
+           week: week,
+           year: year
+         }
+          mainService.makeLive(newObj).then(function(respsone){
+          })
+       }else {
+         return false;
+       }
+  }
+  
+
 })

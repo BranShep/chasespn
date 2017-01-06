@@ -3,16 +3,36 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   this.getTeams = function(obj){
     console.log(obj);
     return $http({
-      method: 'POST',
-      url: '/teams',
-      data: obj
+      method: 'GET',
+      url: '/teams/' + obj.week,
+      params: {
+        year: obj.year
+      }
+    })
+  }
+  
+  this.getTeamsFinal = function(obj){
+    console.log(obj);
+    return $http({
+      method: 'GET',
+      url: '/teamsFinal/' + obj.week,
+      params: {
+        year: obj.year
+      }
     })
   }
 
-  this.getTeamsTwo = function(){
+  this.getTeamsTwo = function(year){
     return $http({
       method: 'GET',
-      url: '/teams'
+      url: '/teamsTwo/' + year
+    })
+  }
+  
+  this.getTeamsTwoFinal = function(year){
+    return $http({
+      method: 'GET',
+      url: '/teamsTwoFinal/' + year
     })
   }
 
@@ -21,6 +41,15 @@ angular.module('chasepn').service('mainService', function($http, $sce){
     return $http({
       method: 'POST',
       url: '/rankings',
+      data: obj
+    })
+  }
+  
+  this.updateRankingsTemp = function(obj){
+    console.log(obj);
+    return $http({
+      method: 'POST',
+      url: '/temp',
       data: obj
     })
   }
@@ -37,7 +66,7 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   this.getStandings = function(){
     return $http({
       method: 'GET',
-      url: 'https://erikberg.com/nba/standings.json'
+      url: 'https://cors-anywhere.herokuapp.com/https://erikberg.com/nba/standings.json'
     })
   }
 
@@ -59,10 +88,10 @@ angular.module('chasepn').service('mainService', function($http, $sce){
     })
   }
 
-  this.getWeeks = function(){
+  this.getWeeks = function(year){
     return $http({
       method: 'GET',
-      url: '/weeks'
+      url: '/weeks/' + year
     })
   }
 
@@ -90,5 +119,35 @@ angular.module('chasepn').service('mainService', function($http, $sce){
       data: obj
     })
   }
+
+ this.deleteWeek = function(obj){
+    console.log(obj);
+    return $http({
+      method: 'DELETE',
+      url: '/rankings/' + obj.week,
+      params: {
+        year: obj.year
+      }
+    })
+  }
+
+ this.deleteWeekTwo = function(obj){
+    return $http({
+      method: 'DELETE',
+      url: '/weeks/' + obj.week,
+      params: {
+        year: obj.year
+      }
+    })
+  }
+
+ this.makeLive = function(obj){
+    console.log(obj);
+    return $http({
+      method: 'POST',
+      url: '/temp',
+      data: obj
+    })
+ }
 
 })
