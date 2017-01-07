@@ -186,22 +186,18 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
     $scope.deleteWeek = function(week, year) {
           var x = confirm("Are you sure you want to delete?");
        if(x){
-	 var newObj = {
+	        var newObj = {
            week: week,
            year: year
-         }
+          }
           mainService.deleteWeek(newObj).then(function(response){
-            $state.reload();
+            mainService.deleteWeekTwo(newObj).then(function(response){
+              $state.reload();
+            })
           })
        }else {
           return false;
        }
-    }
-
-   $scope.deleteWeekTwo = function() {
-      mainService.deleteWeekTwo().then(function(response){
-        $scope.getTeamsTwo();
-      })
     }
 
   $scope.makeLive = function(week, year) {

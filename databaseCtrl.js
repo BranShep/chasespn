@@ -106,14 +106,6 @@ module.exports = {
 
   deleteWeek: function(req, res, next){
     db.delete_week([req.params.id, req.query.year], function(err, week){
-       res.json(week);
-    })
-
-    db.delete_week_two([req.params.id, req.query.year], function(err, week){
-       res.json(week);
-    })
-
-    db.delete_week_temp([req.params.id, req.query.year], function(err, week){
       res.json(week);
     })
   },

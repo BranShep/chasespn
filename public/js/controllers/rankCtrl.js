@@ -33,16 +33,19 @@ angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $
   }
 
 //Get teams from datbase in order of previous week's rankings
-  $scope.getTeamsTwo = function(year){
-    mainService.getTeamsTwo(year).then(function(response){
+$scope.getTeamsTwo = function(year){
+  mainService.getTeamsTwo(year).then(function(response){
+    console.log(response);
+    if(response.data === "" || response.data[0].max === null){
+      $scope.currentWeek = 1;
+      mainService.getAllTeams().then(function(response){
+        $scope.teamsTwo = response.data;
+      })
+    }else {
       $scope.currentWeek = response.data[0].max + 1;
       $scope.previousWeek = response.data[0].max;
       console.log($scope.previousWeek);
-      if ($scope.previousWeek === null) {
-        mainService.getAllTeams().then(function(response){
-          $scope.teamsTwo = response.data;
-        })
-      }else{
+
 
         var newObj = {
           week: $scope.previousWeek,
@@ -52,9 +55,9 @@ angular.module('chasepn').controller('rankCtrl', function($scope, mainService, $
           console.log(response);
           $scope.teamsTwo = response.data;
         })
-      }
-    })
-  }
+    }
+  })
+}
 
   $scope.getTeamsTwo($scope.date);
 
