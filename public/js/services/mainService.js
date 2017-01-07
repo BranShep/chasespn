@@ -162,4 +162,11 @@ angular.module('chasepn').service('mainService', function($http, $sce){
     })
  }
 
+ this.test = function(){
+   return $http({
+     method: 'GET',
+     url: '/test'
+   })
+ }
+
 })

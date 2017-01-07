@@ -53,6 +53,7 @@ app.get('/allTeams', databaseCtrl.getAllTeams);
 app.put('/title', databaseCtrl.saveTitle);
 app.delete('/rankings/:id', databaseCtrl.deleteWeek);
 app.delete('/weeks/:id', databaseCtrl.deleteWeekTwo);
+app.get('/test', databaseCtrl.test);
 
 app.listen(port, function(){
   console.log("Successfully listening on : 3000");

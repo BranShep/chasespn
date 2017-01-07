@@ -114,6 +114,13 @@ module.exports = {
     db.delete_week_two([req.params.id, req.query.year], function(err, week){
        res.json(week);
     })
-  }
+  },
+
+  test: function(req, res, next){
+    console.log('in test');
+     db.test(function(err, week){
+        res.json(week);
+     })
+   }
 
 }

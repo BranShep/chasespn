@@ -112,4 +112,12 @@ $scope.getTeamsTwo = function(year){
     })
   }
 
+  $scope.test = function() {
+    mainService.test().then(function(response){
+      console.log(response);
+    })
+  }
+
+  $scope.test();
+
 });
