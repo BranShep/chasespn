@@ -96,9 +96,9 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
 
     }
 
-  
+
   $scope.getStandings();
-  
+
   $scope.creds = {
     bucket: 'chasepn',
     access_key: 'AKIAJEAOLYQOTZGBNGVA',
@@ -109,7 +109,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
           $scope.$apply(function($scope) {
               $scope.file = element.files[0];
           });
-      }; 
+      };
 
   $scope.sizeLimit      = 10585760; // 10MB in Bytes
     $scope.uploadProgress = 0;
@@ -146,7 +146,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
             else {
               // Upload Successfully Finished
               toastr.success('File Uploaded Successfully', 'Done');
-              
+
               $state.reload();
               // Reset The Progress Bar
               setTimeout(function() {
@@ -195,15 +195,15 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
           })
        }else {
           return false;
-       }    
+       }
     }
-   
+
    $scope.deleteWeekTwo = function() {
       mainService.deleteWeekTwo().then(function(response){
         $scope.getTeamsTwo();
       })
     }
-   
+
   $scope.makeLive = function(week, year) {
     console.log(week,year);
     var x = confirm("Are you sure you want to go live?");
@@ -211,13 +211,34 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
           var newObj = {
            week: week,
            year: year
-         }
-          mainService.makeLive(newObj).then(function(respsone){
+          }
+          mainService.getTeamsFinal(newObj).then(function(response){
+            console.log(response.data);
+            if(response.data.length === 0){
+              mainService.makeLive(newObj).then(function(respsone){
+                $state.go('home');
+              })
+            }else {
+              $scope.finalWeek = response.data[0].weekid;
+
+              if($scope.finalWeek === week) {
+                mainService.deleteLive(newObj).then(function(response){
+                  mainService.makeLive(newObj).then(function(respsone){
+                    $state.go('home');
+                  })
+                })
+              }else {
+                mainService.makeLive(newObj).then(function(respsone){
+                  $state.go('home');
+                })
+              }
+            }
           })
+
        }else {
          return false;
        }
   }
-  
+
 
 })

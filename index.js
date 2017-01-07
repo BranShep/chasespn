@@ -33,7 +33,7 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-var port = 80;
+var port = 3000;
 
 
 app.get('/teams/:id', databaseCtrl.getTeams);
@@ -43,6 +43,7 @@ app.get('/teamsTwoFinal/:year', databaseCtrl.getTeamsTwoFinal);
 app.get('/description', databaseCtrl.getDescriptions);
 app.post('/rankings', databaseCtrl.updateRankings);
 app.post('/temp', databaseCtrl.updateTemp);
+app.delete('/temp/:week', databaseCtrl.deleteLive);
 app.put('/rankings', databaseCtrl.updateDetails);
 app.put('/rankings/image', databaseCtrl.upload);
 app.put('/record', databaseCtrl.updateRecord);

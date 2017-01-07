@@ -1,4 +1,4 @@
-SELECT teams.name, rankings.record, teams.image, rankings.ranking, teams.teamID, rankings.previous_ranking, rankings.description, rankings.year, rankings.weekID, rankings.position, rankings.title, rankings.mainimage, rankings.date
+SELECT teams.name, temp.record, teams.image, temp.ranking, teams.teamID, temp.previous_ranking, temp.description, temp.year, temp.weekID, temp.position, temp.title, temp.mainimage, temp.date
 FROM teams
 INNER JOIN temp
 ON teams.teamID=temp.teamID

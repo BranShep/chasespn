@@ -1,4 +1,4 @@
 DELETE
-FROM rankings
+FROM temp
 WHERE weekid=$1
 AND year=$2;

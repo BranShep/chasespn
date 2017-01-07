@@ -9,9 +9,9 @@ module.exports = {
         res.json(teams);
       })
   },
- 
+
   getTeamsFinal: function(req, res, next){
-      console.log('in get teams');
+      console.log('in get teamsfinal');
       db.get_teams_final([req.params.id, req.query.year] , function(err, teams){
         res.json(teams);
       })
@@ -24,9 +24,10 @@ module.exports = {
         res.json(teams);
       })
   },
- 
+
   getTeamsTwoFinal: function(req, res, next){
-      console.log('in get teamsTwo');
+      console.log('in get teamsTwo final');
+      console.log(req.params.year);
       db.get_teams_two_final([req.params.year], function(err, teams){
         res.json(teams);
       })
@@ -44,11 +45,18 @@ module.exports = {
       res.json(ranking);
     })
   },
-  
+
   updateTemp: function(req, res, next){
    console.log(req.body.week);
    console.log('in updateTemp');
     db.post_temp([req.body.week, req.body.year], function(err, temp){
+      res.json(temp);
+    })
+  },
+
+  deleteLive: function(req, res, next){
+   console.log('in updateTemp');
+    db.delete_live([req.params.week, req.query.year], function(err, temp){
       res.json(temp);
     })
   },
@@ -100,9 +108,13 @@ module.exports = {
     db.delete_week([req.params.id, req.query.year], function(err, week){
        res.json(week);
     })
-    
+
     db.delete_week_two([req.params.id, req.query.year], function(err, week){
        res.json(week);
+    })
+
+    db.delete_week_temp([req.params.id, req.query.year], function(err, week){
+      res.json(week);
     })
   },
 

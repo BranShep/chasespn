@@ -10,7 +10,7 @@ angular.module('chasepn').service('mainService', function($http, $sce){
       }
     })
   }
-  
+
   this.getTeamsFinal = function(obj){
     console.log(obj);
     return $http({
@@ -28,8 +28,9 @@ angular.module('chasepn').service('mainService', function($http, $sce){
       url: '/teamsTwo/' + year
     })
   }
-  
+
   this.getTeamsTwoFinal = function(year){
+    console.log(year);
     return $http({
       method: 'GET',
       url: '/teamsTwoFinal/' + year
@@ -44,7 +45,7 @@ angular.module('chasepn').service('mainService', function($http, $sce){
       data: obj
     })
   }
-  
+
   this.updateRankingsTemp = function(obj){
     console.log(obj);
     return $http({
@@ -147,6 +148,17 @@ angular.module('chasepn').service('mainService', function($http, $sce){
       method: 'POST',
       url: '/temp',
       data: obj
+    })
+ }
+
+ this.deleteLive = function(obj){
+    console.log(obj);
+    return $http({
+      method: 'DELETE',
+      url: '/temp/' + obj.week,
+      params: {
+        year: obj.year
+      }
     })
  }
 

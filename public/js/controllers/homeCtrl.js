@@ -1,5 +1,5 @@
 angular.module('chasepn').controller('homeCtrl', function(authService, $scope, mainService, $document){
-  
+
   var vm = this;
     vm.authService = authService;
 
@@ -8,7 +8,7 @@ angular.module('chasepn').controller('homeCtrl', function(authService, $scope, m
     authService.getProfileDeferred().then(function (profile) {
      vm.profile = profile;
    });
-  
+
   $scope.test = 'Hello there angular';
   console.log('in home');
   $scope.getFacebook = function() {
@@ -87,9 +87,9 @@ angular.module('chasepn').controller('homeCtrl', function(authService, $scope, m
     var dateTwo = (Number(date) + 1).toString();
     $scope.date = $scope.d.getFullYear().toString() + '-' + dateTwo;
   }
-  
+
   console.log($scope.date);
- 
+
   $scope.getTeamsTwo = function(year){
     mainService.getTeamsTwoFinal(year).then(function(response){
       console.log(response);
@@ -99,6 +99,8 @@ angular.module('chasepn').controller('homeCtrl', function(authService, $scope, m
         week: $scope.currentWeek,
         year: year
       }
+
+      console.log(newObj);
       mainService.getTeamsFinal(newObj).then(function(response){
         $scope.teams = response.data;
         console.log($scope.teams);
@@ -122,9 +124,9 @@ angular.module('chasepn').controller('homeCtrl', function(authService, $scope, m
   $scope.getWeeks = function(year){
     mainService.getWeeks(year).then(function(response){
       console.log(response.data);
-      
+
      var weeksArr = response.data;
-     var weeks = []; 
+     var weeks = [];
      for(var i=0; i < weeksArr.length; i++){
         weeks.push(weeksArr[i].weekid);
      }
@@ -158,13 +160,13 @@ $('.modal').on('show.bs.modal', function() {
 
     // Position backdrop absolute and make it span the entire page
     //
-    // Also dirty, but we need to tap into the backdrop after Boostrap 
+    // Also dirty, but we need to tap into the backdrop after Boostrap
     // positions it but before transitions finish.
     //
     setTimeout( function() {
     $('.modal-backdrop').css({
-        position: 'absolute', 
-        top: 0, 
+        position: 'absolute',
+        top: 0,
         left: 0,
         width: '100%',
         height: Math.max(
@@ -176,7 +178,7 @@ $('.modal').on('show.bs.modal', function() {
     }, 0);
 });
 }
- 
+
 
 
 })
