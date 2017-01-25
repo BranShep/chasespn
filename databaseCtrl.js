@@ -119,7 +119,7 @@ module.exports = {
   test: function(req, res, next){
     console.log('in test');
      db.test(function(err, week){
-        res.json(week);
+        res.json(err || week);
      })
    }
 

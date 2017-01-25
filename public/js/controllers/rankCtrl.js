@@ -119,5 +119,8 @@ $scope.getTeamsTwo = function(year){
   }
 
   $scope.test();
-
+  
+  $scope.refresh = function() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
 });

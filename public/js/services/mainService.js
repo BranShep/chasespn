@@ -12,7 +12,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.getTeamsFinal = function(obj){
-    console.log(obj);
     return $http({
       method: 'GET',
       url: '/teamsFinal/' + obj.week,
@@ -30,7 +29,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.getTeamsTwoFinal = function(year){
-    console.log(year);
     return $http({
       method: 'GET',
       url: '/teamsTwoFinal/' + year
@@ -38,7 +36,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.updateRankings = function(obj){
-    console.log(obj);
     return $http({
       method: 'POST',
       url: '/rankings',
@@ -47,7 +44,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.updateRankingsTemp = function(obj){
-    console.log(obj);
     return $http({
       method: 'POST',
       url: '/temp',
@@ -56,7 +52,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.updateDetails = function(obj){
-    console.log(obj);
     return $http({
       method: 'PUT',
       url: '/rankings',
@@ -72,7 +67,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.updateRecord = function(obj){
-    console.log(obj);
     return $http({
       method: 'PUT',
       url: '/record',
@@ -81,7 +75,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.updateWeeks = function(week){
-    console.log(week);
     return $http({
       method: 'POST',
       url: '/weeks',
@@ -104,7 +97,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.upload = function(obj){
-    console.log(obj);
     return $http({
       method: 'PUT',
       url: '/rankings/image',
@@ -113,7 +105,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
   this.saveTitle = function(obj){
-    console.log(obj);
     return $http({
       method: 'PUT',
       url: '/title',
@@ -122,7 +113,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
  this.deleteWeek = function(obj){
-    console.log(obj);
     return $http({
       method: 'DELETE',
       url: '/rankings/' + obj.week,
@@ -143,7 +133,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
   }
 
  this.makeLive = function(obj){
-    console.log(obj);
     return $http({
       method: 'POST',
       url: '/temp',
@@ -152,7 +141,6 @@ angular.module('chasepn').service('mainService', function($http, $sce){
  }
 
  this.deleteLive = function(obj){
-    console.log(obj);
     return $http({
       method: 'DELETE',
       url: '/temp/' + obj.week,

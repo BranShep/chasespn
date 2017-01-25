@@ -1,8 +1,8 @@
 angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams, $rootScope, $state, $scope, mainService, $location, authService){
   $scope.test = 'Hello there angular';
-  $rootScope.$on('$viewContentLoaded',function(){
-            jQuery('html, body').animate({ scrollTop: 0 }, 200);
-        });
+ // $rootScope.$on('$viewContentLoaded',function(){
+   //         jQuery('html, body').animate({ scrollTop: 0 }, 200);
+     //   });
   $scope.user = JSON.parse(localStorage.getItem('profile'));
   $scope.name = $scope.user.name;
   $scope.profilePic = $scope.user.picture;
@@ -10,7 +10,6 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
   $scope.d = new Date();
   if($scope.d.getMonth() === 0 || $scope.d.getMonth() === 1 || $scope.d.getMonth() === 2 || $scope.d.getMonth() === 3 || $scope.d.getMonth() === 4 || $scope.d.getMonth() === 5){
     $scope.date = ($scope.d.getFullYear() - 1).toString();
-    console.log($scope.date);
     var date = $scope.date.slice(2,5);
     var dateTwo = (Number(date) + 1).toString();
     $scope.date = $scope.date + '-' + dateTwo;
@@ -32,6 +31,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
       }
       mainService.getTeams(newObj).then(function(response){
         $scope.teams = response.data;
+        console.log($scope.teams);
       })
     })
   }
@@ -43,7 +43,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
 
   $scope.updateDetails = function(teams, weekid, year){
 
-    for (var i = 0; i <= teams.length; i++){
+    for (var i = 0; i < teams.length; i++){
       var newObj = {
         description: teams[i].description,
         teamid: teams[i].teamid,
@@ -51,10 +51,11 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
         year: year
       }
       mainService.updateDetails(newObj).then(function(response){
-         $state.go('home');
       })
     }
-
+    console.log('Draft saved');
+    alert('Draft Saved');
+    $state.reload();
     // if(description === undefined){
     //   description = tdesc;
     // }
@@ -86,7 +87,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
 
     $scope.poo = function(standings){
       var standingsArr = [];
-          for(var i = 0; i <= standings.length; i++){
+          for(var i = 0; i < standings.length; i++){
               var newObj = {
                 name: standings[i].first_name + ' ' + standings[i].last_name,
                 record: standings[i].won + " " + '-' + " " + standings[i].lost
@@ -146,7 +147,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
             else {
               // Upload Successfully Finished
               toastr.success('File Uploaded Successfully', 'Done');
-
+              alert('File uploaded');
               $state.reload();
               // Reset The Progress Bar
               setTimeout(function() {
@@ -179,7 +180,7 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
       }
 
       mainService.saveTitle(newObj).then(function(response){
-         $state.reload();
+         alert('Title saved!');
       })
     }
 
@@ -201,7 +202,6 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
     }
 
   $scope.makeLive = function(week, year) {
-    console.log(week,year);
     var x = confirm("Are you sure you want to go live?");
        if(x){
           var newObj = {
@@ -209,7 +209,6 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
            year: year
           }
           mainService.getTeamsFinal(newObj).then(function(response){
-            console.log(response.data);
             if(response.data.length === 0){
               mainService.makeLive(newObj).then(function(respsone){
                 $state.go('home');
@@ -235,6 +234,9 @@ angular.module('chasepn').controller('updateRankingsCtrl', function($stateParams
          return false;
        }
   }
-
+ 
+  $scope.refresh = function() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  } 
 
 })

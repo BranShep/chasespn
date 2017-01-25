@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 var bodyParser = require('body-parser');
 var config = require('./config.js');
 var massive = require('massive');
@@ -16,24 +17,15 @@ var jwt = require('express-jwt');
 
 
 app.use(express.static('public'));
-
+app.use(cors());
 
 app.set('db', massiveInstance);
 var databaseCtrl = require('./databaseCtrl.js');
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
-app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,POST,PUT,DELETE');
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
-    if ('OPTIONS' == req.method){
-        return res.send(200);
-    }
-    next();
-});
 
-var port = 3000;
+var port = 80;
 
 
 app.get('/teams/:id', databaseCtrl.getTeams);

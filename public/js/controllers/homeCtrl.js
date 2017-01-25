@@ -1,5 +1,7 @@
-angular.module('chasepn').controller('homeCtrl', function(authService, $scope, mainService, $document){
-
+angular.module('chasepn').controller('homeCtrl', function($rootScope, $state, authService, $scope, mainService, $document){
+  
+  $scope.showFacebook = false;
+  
   var vm = this;
     vm.authService = authService;
 
@@ -14,10 +16,30 @@ angular.module('chasepn').controller('homeCtrl', function(authService, $scope, m
   $scope.getFacebook = function() {
       FB.ui({
           method: 'share',
-          href: 'http://www.chasespn.com/',
+          href: 'http://www.chasepn.com/',
           display: 'popup',
           mobile_iframe: true
       });
+  }
+  
+  $scope.sendFacebook = function() {
+     var mobile_width = window.matchMedia("(max-width: 480px)");
+
+     if(mobile_width.mathces){
+          FB.ui({
+            method: 'send',
+            link: 'http://www.chasepn.com/',
+            mobile_iframe: true,
+            display: 'popup'
+          });
+     }else {
+          FB.ui({
+            method: 'send',
+            link: 'http://www.chasepn.com/',
+            mobile_iframe: true,
+            display: 'iframe'
+          });
+     }
   }
 
   window.twttr = (function(d, s, id) {
@@ -43,8 +65,18 @@ angular.module('chasepn').controller('homeCtrl', function(authService, $scope, m
 
 
   $scope.enter = function(){
-
-   // document.body.style.overflow = 'hidden';
+    $scope.weekNumber = $scope.teams[0].weekid;
+    $scope.yearNumber = $scope.teams[0].year;
+    $scope.commentsTitle = $scope.teams[0].title;
+    console.log($scope.teams[0].weekid, $scope.teams[0].year, $scope.teams[0].title);
+   if (window.matchMedia("(max-width: 800px)").matches) {
+       /* the viewport is at least 400 pixels wide */
+       document.body.scrollTop = document.documentElement.scrollTop = 0;
+       document.body.style.overflow = 'hidden';
+       document.body.style.position = 'fixed';
+   } else {
+       /* the viewport is less than 400 pixels wide */
+   }
 
     window.fbAsyncInit = function() {
         FB.init({
@@ -68,6 +100,7 @@ angular.module('chasepn').controller('homeCtrl', function(authService, $scope, m
 
   $scope.exit = function(){
     document.body.style.overflow = 'visible';
+    document.body.style.position = 'static';
     console.log($scope.show);
   }
 
@@ -179,6 +212,10 @@ $('.modal').on('show.bs.modal', function() {
 });
 }
 
+  $scope.refresh = function() {
+   document.body.scrollTop = document.documentElement.scrollTop = 0;
+  } 
 
-
+  $scope.refresh();
+  
 })

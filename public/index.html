@@ -9,7 +9,7 @@
     <meta property="og:type"               content="article" />
     <meta property="og:description"              content='Check out www.chasepn.com to see how Chase Martin ranks your favorite NBA teams.' />
      <meta property="og:title"              content='NBA Power Rankings' />
-    <meta property="og:image"              content='https://s3-us-west-2.amazonaws.com/chasepn/nba.jpg'  />
+    <meta property="og:image"              content='https://s3-us-west-2.amazonaws.com/chasepn/chasepn.png'  />
     <link rel="icon" href="/images/chase.jpg">
     <link rel="stylesheet" type="text/css" href="/css/base.css">
     <link rel="stylesheet" href="/css/styles.css" media="screen" title="no title" charset="utf-8">
@@ -24,12 +24,11 @@
   </head>
   <body ng-controller='homeCtrl'>
 	
-
-  <!-- Modal -->
+     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class='exit' data-dismiss="modal">X</div>
+          <div class='exit' ng-click='exit()' data-dismiss="modal">X</div>
           <div class='comments-title'>
             <h1 class='main-title' style='font-size: 20px;'>{{teams[0].title}}</h1>
           </div>
@@ -49,13 +48,12 @@
       </div>
     </div>
 
-
      <div id="mySidenav" class="sidenav">   
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a ui-sref="home" onclick="closeNav()">Home</a>
-      <a ui-sref="rank" onclick="closeNav()">New Rankings</a>
-      <a ui-sref="update_rankings" onclick="closeNav()">Update Rankings</a>
-      <a ui-sref="home" onclick="closeNav()" ng-click="authService.logout()">Log out</a>
+      <a ui-sref="home" onclick="closeNav(); refresh()">Home</a>
+      <a ui-sref="rank" onclick="closeNav(); refresh()">New Rankings</a>
+      <a ui-sref="update_rankings" onclick="closeNav(); refresh()">Update Rankings</a>
+      <a ui-sref="home" onclick="closeNav(); refresh()" ng-click="authService.logout()">Log out</a>
     </div>
 
     <script type="text/javascript">
@@ -98,8 +96,8 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 
           <!--ANGULAR ANGULAR -->
-          <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+          <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
@@ -140,5 +138,6 @@
           <script src="/js/services/auth.service.js"></script>
           <script src="/js/controllers/admin.controller.js"></script>
           <script src="http://cdn.auth0.com/js/lock/10.7.3/lock.min.js"></script>
+        
   </body>
 </html>

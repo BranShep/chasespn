@@ -21,11 +21,10 @@ angular.module('chasepn')
               templateUrl: '/views/rank.html',
               controller: 'rankCtrl'
             })
-            .state('login', {
-              url: '/login',
-              controller: 'LoginController',
-              templateUrl: '/views/login.html',
-              controllerAs: 'vm'
+            .state('facebook', {
+              url: '/facebook',
+              controller: 'homeCtrl',
+              templateUrl: '/views/facebook.html'
             })
             .state('profile', {
               url: '/profile',
@@ -34,7 +33,7 @@ angular.module('chasepn')
             })
             .state('admin', {
               url: '/admin',
-               controller: 'AdminController',
+               controller: 'homeCtrl',
                templateUrl: '/views/admin.html',
                controllerAs: 'vm'
             });
@@ -57,3 +56,4 @@ angular.module('chasepn')
 
 
 });
+
